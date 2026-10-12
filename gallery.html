@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gallery</title>
+<style>
+:root{
+  --bg:#F3F4F6; --ink:#16191F; --muted:#5E6573; --overlay:rgba(14,18,26,.88); --overlay-ink:#fff;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0F1218; --ink:#ECEFF4; --muted:#9AA3B2; --overlay:rgba(0,0,0,.85);}
+}
+:root[data-theme="dark"]{--bg:#0F1218; --ink:#ECEFF4; --muted:#9AA3B2; --overlay:rgba(0,0,0,.85);}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:90rem;margin:0 auto;padding:2rem 1.25rem 4rem}
+h1{font-size:clamp(2rem,6vw,3.25rem);letter-spacing:-.03em;margin:0 0 .25rem}
+.sub{color:var(--muted);margin:0 0 2rem}
+/* Back button */
+.back{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 1.5rem;padding:.5rem 1rem;border:1px solid var(--muted);border-radius:2rem;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;transition:background .2s ease}
+.back:hover{background:var(--ink);color:var(--bg)}
+.back:focus-visible{outline:3px solid #7F93FF;outline-offset:3px}
+
+.gallery{columns:3;column-gap:1.5rem}
+.item{position:relative;margin:0 0 1.5rem;break-inside:avoid;overflow:hidden;border-radius:.5rem;cursor:pointer;background:#000}
+.item img{display:block;width:100%;height:auto}
+
+/* 2 columns on tablets */
+@media (max-width:60rem){
+  .gallery{columns:2}
+}
+/* 1 column on phones */
+@media (max-width:36rem){
+  .gallery{columns:1}
+}
+
+/* Overlay: invisible by default, fades in on hover or keyboard focus */
+.info{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.25rem;background:var(--overlay);color:var(--overlay-ink);
+  opacity:0;transition:opacity .3s ease;
+}
+.item:hover .info,
+.item:focus-visible .info,
+.item:focus-within .info{opacity:1}
+.item:focus-visible{outline:3px solid #7F93FF;outline-offset:3px}
+.info h2{margin:0 0 .25rem;font-size:1.2rem}
+.info p{margin:0;font-size:.9rem;opacity:.85}
+.info .meta{margin-top:.6rem;font-size:.8rem;opacity:.7}
+@media (prefers-reduced-motion:reduce){.info{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <a class="back" href="index.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Back</a>
+  <h1>Gallery</h1>
+  <p class="sub">Hover over an image (or tap it) to see the details.</p>
+
+  <div class="gallery">
+    <!-- To use real photos, replace each src with your image path, e.g. src="images/photo1.jpg" -->
+    <figure class="item" tabindex="0">
+      <img alt="Montreal Townhouses on Fire" src="montreal_townhouses.png">
+      <figcaption class="info">
+        <h2>It's Closer to Home Than You Think</h2>
+        <p>A school project focusing on anti-complacency.</p>
+        <span class="meta">Montreal, Canada · 2025</span>
+      </figcaption>
+    </figure>
+
+    <figure class="item" tabindex="0">
+      <img alt="Fish Pinup" src="fish_pinup.png">
+      <figcaption class="info">
+        <h2>Fish Pinup</h2>
+        <p>A fun twist on a 1950s pinup with a fish head.</p>
+        <span class="meta">Toronto, Canada · 2024 · 50mm f/1.8</span>
+      </figcaption>
+    </figure>
+
+    <figure class="item" tabindex="0">
+      <img alt="Album Cover Art" src="hands_album_cover.png">
+      <figcaption class="info">
+        <h2>Album Cover Art.</h2>
+            <p>A remade album cover inspired by "Ancient Dreams in a Modern Land" by MARINA.</p>
+        <span class="meta">Montreal, Canada · 2023</span>
+      </figcaption>
+    </figure>
+
+    <figure class="item" tabindex="0">
+      <img alt="Abstract purple artwork with a pink circle" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%236B3FA0'/%3E%3Ccircle cx='280' cy='150' r='80' fill='%23F7A8C8'/%3E%3C/svg%3E">
+      <figcaption class="info">
+        <h2>Night Market</h2>
+        <p>Lanterns and steam from the food stalls after dark.</p>
+        <span class="meta">Taipei, Taiwan · 2024 · 28mm f/1.8</span>
+      </figcaption>
+    </figure>
+
+    <figure class="item" tabindex="0">
+      <img alt="Abstract orange artwork with a dark bar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23D9822B'/%3E%3Crect x='60' y='320' width='280' height='50' fill='%23382211'/%3E%3C/svg%3E">
+      <figcaption class="info">
+        <h2>Desert Road</h2>
+        <p>A long straight highway under a heat haze.</p>
+        <span class="meta">Utah, USA · 2022 · 85mm f/4</span>
+      </figcaption>
+    </figure>
+
+    <figure class="item" tabindex="0">
+      <img alt="Abstract slate artwork with a red ring" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23394150'/%3E%3Ccircle cx='200' cy='200' r='85' fill='none' stroke='%23E5484D' stroke-width='28'/%3E%3C/svg%3E">
+      <figcaption class="info">
+        <h2>Red Door</h2>
+        <p>A single painted door on a weathered stone wall.</p>
+        <span class="meta">Lisbon, Portugal · 2023 · 35mm f/2.8</span>
+      </figcaption>
+    </figure>
+  </div>
+</div>
+</body>
+</html>
