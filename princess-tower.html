@@ -28,7 +28,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grote
 .stage{position:relative;overflow:hidden;border-radius:.75rem;aspect-ratio:5/4;background:#141E30 url("imgs/princess-tower/bg.png") center/cover no-repeat}.shot{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .35s ease}
 .shot.on{opacity:1}
 .shot img{display:block;width:100%;height:100%;object-fit:contain}
-.shot{position:absolute;inset:0;margin:0;padding:7.5%;opacity:0;transition:opacity .35s ease;background:var(--bg-img,none) center/cover no-repeat}
+.shot{position:absolute;inset:0;margin:0;padding:var(--pad,7.5%);opacity:0;transition:opacity .35s ease;background:var(--bg-img,none) center/cover no-repeat}
 .menu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
 .menu li{flex:1}
 .menu button{width:100%;height:100%;padding:.75rem 1rem;text-align:left;font:inherit;font-size:1.25rem;font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:.5rem;cursor:pointer;transition:background .2s ease,color .2s ease}.menu button:hover,.menu button[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -76,8 +76,8 @@ dd{margin:0}
     <figure class="shot" data-title="Walk Cycle"><img alt="Walk cycle" src="imgs/princess-tower/princess-walking.gif"></figure>
     <figure class="shot" data-title="Run Cycle"><img alt="Run cycle" src="imgs/princess-tower/princess-running.gif"></figure>
     <figure class="shot" data-title="Jump Cycle"><img alt="Jump cycle" src="imgs/princess-tower/princess-jumping.gif"></figure>
-    <!-- <figure class="shot" data-title="Hurt/Death Animation"><img alt="Hurt/Death Animation" src="imgs/princess-tower/"></figure> -->
-    <figure class="shot" data-title="Climb Cycle" style="--bg-img:url('imgs/princess-tower/bg-ladder.png')"><img alt="climb cycle" src="imgs/princess-tower/princess-climbing.gif"></figure>
+    <figure class="shot" data-title="Death Animation" style="--pad:3%"><img alt="death animation" src="imgs/princess-tower/princess-dying.gif"></figure>
+    <figure class="shot" data-title="Climb Cycle" style="--bg-img:url('imgs/princess-tower/bg-ladder.png'); --pad:0%"><img alt="climb cycle" src="imgs/princess-tower/princess-climbing.gif"></figure>
     <!-- <figure class="shot" data-title="Dash Animation"><img alt="dash animation" src="imgs/princess-tower/princess-dashing.gif"></figure> -->
   </div>
   <ul class="menu" id="menu"></ul>
