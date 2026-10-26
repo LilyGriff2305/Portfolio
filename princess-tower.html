@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2D Metroidvania / Platformer – Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F5; --ink:#18212E; --muted:#5B6678; --line:#C9D1DD; --accent:#2540F5;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#10151D; --ink:#E8ECF2; --muted:#98A3B5; --line:#2B3442; --accent:#7F93FF;}
+}
+:root[data-theme="dark"]{--bg:#10151D; --ink:#E8ECF2; --muted:#98A3B5; --line:#2B3442; --accent:#7F93FF;}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;font-size:1.0625rem}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:64rem;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.back{display:inline-block;margin-bottom:1.5rem;color:var(--ink);font-weight:600;text-decoration:none}
+.back:hover{color:var(--accent)}
+
+/* Image viewer: main image on the left, hover menu on the right */
+.viewer{display:grid;grid-template-columns:1fr 14rem;gap:1rem;align-items:stretch}
+.stage{position:relative;overflow:hidden;border-radius:.75rem;aspect-ratio:5/4;background:#141E30 url("imgs/princess-tower/bg.png") center/cover no-repeat}.shot{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .35s ease}
+.shot.on{opacity:1}
+.shot img{display:block;width:100%;height:100%;object-fit:contain}
+.shot{position:absolute;inset:0;margin:0;padding:7.5%;opacity:0;transition:opacity .35s ease;background:var(--bg-img,none) center/cover no-repeat}
+.menu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.menu li{flex:1}
+.menu button{width:100%;height:100%;padding:.75rem 1rem;text-align:left;font:inherit;font-size:1.25rem;font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:.5rem;cursor:pointer;transition:background .2s ease,color .2s ease}.menu button:hover,.menu button[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:48rem){
+  .viewer{grid-template-columns:1fr}
+  .menu{flex-direction:row;overflow-x:auto}
+  .menu li{flex:0 0 auto}
+  .menu button{white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){.shot{transition:none}}
+
+/* Project details */
+h1{font-size:clamp(2.25rem,7vw,4rem);letter-spacing:-.035em;line-height:1;margin:2.5rem 0 1rem}
+.lead{font-size:1.25rem;color:var(--muted);max-width:40rem;margin:0 0 2.5rem}
+.cols{display:grid;gap:2.5rem;grid-template-columns:1fr}
+@media(min-width:48rem){.cols{grid-template-columns:2fr 1fr}}
+.cols h2{font-size:1.25rem;margin:0 0 .5rem}
+.cols p{margin:0 0 1.5rem;max-width:38rem}
+dl{margin:0;border-top:1px solid var(--line)}
+dt{margin-top:1rem;color:var(--muted);font-size:.9rem}
+dd{margin:0}
+
+/* Title row: title on the left, play button on the right */
+.titlebar{display:grid;grid-template-columns:1fr;gap:1.5rem 2.5rem;align-items:center;margin-bottom:2.5rem}
+@media(min-width:48rem){.titlebar{grid-template-columns:2fr 1fr}}
+.titlebar .lead{margin-bottom:0}
+
+/* Play button */
+.play{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0;padding:1rem 1.5rem;background:var(--accent);color:var(--bg);font-weight:800;font-size:1.1rem;text-decoration:none;border-radius:.6rem;box-shadow:0 4px 0 rgba(0,0,0,.3),0 8px 16px rgba(0,0,0,.15);transition:transform .15s ease,box-shadow .15s ease}
+.play:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,.3),0 12px 20px rgba(0,0,0,.2)}
+.play:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){.play{transition:none}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
+
+  <section class="viewer" aria-label="Project images">
+  <div class="stage" id="stage">
+    <!-- Each figure is one image. The menu on the right is built from data-title. -->
+    <!-- To use real photos, replace each src with your image path, e.g. src="images/front.jpg" -->
+    <figure class="shot on" data-title="Idle Cycle"><img alt="idle cycle" src="imgs/princess-tower/princess-idle.gif"></figure>
+    <figure class="shot" data-title="Walk Cycle"><img alt="Walk cycle" src="imgs/princess-tower/princess-walking.gif"></figure>
+    <figure class="shot" data-title="Run Cycle"><img alt="Run cycle" src="imgs/princess-tower/princess-running.gif"></figure>
+    <figure class="shot" data-title="Jump Cycle"><img alt="Jump cycle" src="imgs/princess-tower/princess-jumping.gif"></figure>
+    <!-- <figure class="shot" data-title="Hurt/Death Animation"><img alt="Hurt/Death Animation" src="imgs/princess-tower/"></figure> -->
+    <figure class="shot" data-title="Climb Cycle" style="--bg-img:url('imgs/princess-tower/bg-ladder.png')"><img alt="climb cycle" src="imgs/princess-tower/princess-climbing.gif"></figure>
+    <!-- <figure class="shot" data-title="Dash Animation"><img alt="dash animation" src="imgs/princess-tower/princess-dashing.gif"></figure> -->
+  </div>
+  <ul class="menu" id="menu"></ul>
+  </section>
+  
+  <div class="titlebar">
+  <div>
+    <h1>Princess Tower</h1>
+    <p class="lead">A cross between a 2D metroidvania and a platformer</p>
+  </div>
+  <!-- <a class="play" href="#">&#9654; Click here to play</a> -->
+</div>
+
+  
+  <div class="cols">
+    <div>
+      <h2>Inspiration</h2>
+      <p>This project spawned from my interest in learning Godot. My aim was to subvert the classic game premise where a hero scales a tower to free the princess, instead featuring a princess who needs to work her way down the tower to save herself.</p>
+    </div>
+    <dl>
+      <dt>Role</dt><dd>Character art/animation  &amp; Level design &amp; Programming</dd>
+      <dt>Year</dt><dd>Summer 2026</dd>
+      <dt>Tools</dt><dd>Godot, Pixelorama</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function(){
+  var shots = document.querySelectorAll('#stage .shot');
+  var menu = document.getElementById('menu');
+  var buttons = [];
+
+  function show(k){
+    for (var j = 0; j < shots.length; j++) {
+      shots[j].classList.toggle('on', j === k);
+      buttons[j].setAttribute('aria-current', j === k ? 'true' : 'false');
+    }
+  }
+
+  shots.forEach(function(shot, k){
+    var li = document.createElement('li');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = shot.dataset.title;
+    b.addEventListener('mouseenter', function(){ show(k); });  // mouse hover
+    b.addEventListener('focus', function(){ show(k); });       // keyboard Tab
+    b.addEventListener('click', function(){ show(k); });       // tap on touch screens
+    li.appendChild(b); menu.appendChild(li); buttons.push(b);
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>

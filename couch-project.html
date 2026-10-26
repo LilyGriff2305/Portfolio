@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blender Couch – Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F5; --ink:#18212E; --muted:#5B6678; --line:#C9D1DD; --accent:#2540F5;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#10151D; --ink:#E8ECF2; --muted:#98A3B5; --line:#2B3442; --accent:#7F93FF;}
+}
+:root[data-theme="dark"]{--bg:#10151D; --ink:#E8ECF2; --muted:#98A3B5; --line:#2B3442; --accent:#7F93FF;}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;font-size:1.0625rem}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:64rem;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.back{display:inline-block;margin-bottom:1.5rem;color:var(--ink);font-weight:600;text-decoration:none}
+.back:hover{color:var(--accent)}
+
+/* Banner carousel */
+.banner{position:relative;overflow:hidden;border-radius:.75rem;background:#000;aspect-ratio:16/9}
+.track{display:flex;height:100%;transition:transform .6s ease}
+.slide{position:relative;flex:0 0 100%;margin:0}
+.slide img{display:block;width:100%;height:100%;object-fit:cover}
+.slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:3rem 1.5rem 2.75rem;color:#fff;font-weight:600;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.arrow,.toggle{position:absolute;border:0;background:rgba(0,0,0,.55);color:#fff;cursor:pointer;line-height:1}
+.arrow{top:50%;transform:translateY(-50%);width:2.75rem;height:2.75rem;border-radius:50%;font-size:1.5rem}
+.arrow.prev{left:1rem}.arrow.next{right:1rem}
+.toggle{top:1rem;right:1rem;padding:.4rem .8rem;border-radius:2rem;font-size:.85rem;font-family:inherit}
+.arrow:hover,.toggle:hover{background:rgba(0,0,0,.8)}
+.dots{position:absolute;left:0;right:0;bottom:1rem;display:flex;justify-content:center;gap:.5rem}
+.dots button{width:.75rem;height:.75rem;padding:0;border:2px solid #fff;border-radius:50%;background:transparent;cursor:pointer}
+.dots button[aria-current="true"]{background:#fff}
+@media (max-width:40rem){.arrow{width:2.25rem;height:2.25rem}}
+@media (prefers-reduced-motion:reduce){.track{transition:none}}
+
+/* Project details */
+h1{font-size:clamp(2.25rem,7vw,4rem);letter-spacing:-.035em;line-height:1;margin:2.5rem 0 1rem}
+.lead{font-size:1.25rem;color:var(--muted);max-width:40rem;margin:0 0 2.5rem}
+.cols{display:grid;gap:2.5rem;grid-template-columns:1fr}
+@media(min-width:48rem){.cols{grid-template-columns:2fr 1fr}}
+.cols h2{font-size:1.25rem;margin:0 0 .5rem}
+.cols p{margin:0 0 1.5rem;max-width:38rem}
+dl{margin:0;border-top:1px solid var(--line)}
+dt{margin-top:1rem;color:var(--muted);font-size:.9rem}
+dd{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
+
+  <section class="banner" aria-roledescription="carousel" aria-label="Project images">
+    <div class="track" id="track">
+      <!-- To use real photos, replace each src with your image path, e.g. src="images/slide1.jpg" -->
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-technical-1.png"><figcaption>Technical model - 3/4 view</figcaption></figure>
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-technical-2.png"><figcaption>Technical model - Front view</figcaption></figure>
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-technical-3.png"><figcaption>Technical model - 3/4 view</figcaption></figure>
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-conceptual-1.png"><figcaption>Conceptual model - 3/4 view</figcaption></figure>
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-conceptual-2.png"><figcaption>Conceptual model - 3/4 view</figcaption></figure>
+        <figure class="slide"><img alt="Capture screen" src="imgs/Blender-couch/couch-conceptual-3.png"><figcaption>Conceptual model - Front view</figcaption></figure>
+
+    </div>
+    <button class="arrow prev" id="prev" aria-label="Previous image">&#8249;</button>
+    <button class="arrow next" id="next" aria-label="Next image">&#8250;</button>
+    <button class="toggle" id="toggle" aria-label="Pause slideshow">Pause</button>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <h1>Leather Couch 3D Model</h1>
+  <p class="lead">A 3D model of my brown leather couch. Made using low-poly and hardsurface techniques.</p>
+
+  <div class="cols">
+    <div>
+      <h2>Technical creation</h2>
+      <p>By modeling a couch I've had for years my goal was to depict it as new, followed by the used model.</p>
+      <h2>Theme</h2>
+      <p>I sought to explore the relationship we have with everyday objects and question the supposed value of them. </p>
+    </div>
+    <dl>
+      <dt>Role</dt><dd>Design &amp; Technical application</dd>
+      <dt>Year</dt><dd>Fall 2026</dd>
+      <dt>Tools</dt><dd>Blender, Blenderkit</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DELAY = 5000;                       // milliseconds between automatic slides
+  var track = document.getElementById('track');
+  var slides = track.children, n = slides.length;
+  var dotsBox = document.getElementById('dots');
+  var toggle = document.getElementById('toggle');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, timer = null, paused = reduce;
+  var dots = [];
+
+  for (var k = 0; k < n; k++) {
+    (function(k){
+      var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to image ' + (k + 1));
+      b.addEventListener('click', function(){ go(k); restart(); });
+      dotsBox.appendChild(b); dots.push(b);
+    })(k);
+  }
+
+  function go(x){
+    i = (x + n) % n;
+    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+    for (var k = 0; k < n; k++) {
+      dots[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      slides[k].setAttribute('aria-hidden', k === i ? 'false' : 'true');
+    }
+  }
+  function stop(){ clearInterval(timer); timer = null; }
+  function start(){ stop(); if (!paused) timer = setInterval(function(){ go(i + 1); }, DELAY); }
+  function restart(){ start(); }
+  function label(){ toggle.textContent = paused ? 'Play' : 'Pause'; toggle.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow'); }
+
+  document.getElementById('prev').addEventListener('click', function(){ go(i - 1); restart(); });
+  document.getElementById('next').addEventListener('click', function(){ go(i + 1); restart(); });
+  toggle.addEventListener('click', function(){ paused = !paused; label(); start(); });
+
+  var banner = track.parentNode;
+  banner.addEventListener('mouseenter', stop);
+  banner.addEventListener('mouseleave', start);
+  banner.addEventListener('focusin', stop);
+  banner.addEventListener('focusout', start);
+  banner.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') { go(i - 1); restart(); }
+    if (e.key === 'ArrowRight') { go(i + 1); restart(); }
+  });
+
+  // Swipe on touch screens
+  var startX = null;
+  banner.addEventListener('pointerdown', function(e){ startX = e.clientX; });
+  banner.addEventListener('pointerup', function(e){
+    if (startX === null) return;
+    var dx = e.clientX - startX; startX = null;
+    if (Math.abs(dx) > 50) { go(dx < 0 ? i + 1 : i - 1); restart(); }
+  });
+
+  go(0); label(); start();
+})();
+</script>
+</body>
+</html>
