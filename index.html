@@ -11,7 +11,7 @@
 <!-- CSS CODE -->
 <style>
 :root{
-  --bg:#EEF1F5; --ink:#18212E; --muted:#5B6678; --line:#C9D1DD; --accent:#2540F5; --accent-ink:#fff;
+  --bg:#EEF1F5; --ink:#18212E; --muted:#5B6678; --line:#C9D1DD; --surface:#fff; --accent:#2540F5; --accent-ink:#fff;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
@@ -20,6 +20,7 @@
     --ink:#e4dce7; 
     --muted:#a88ea8; 
     --line:#41253e; 
+    --surface:#21111f;
     --accent:#96af4c; 
     --accent-ink:#321730;
       /* --bg:#321730; --ink:#E8ECF2; --muted:#98A3B5; --line:#2B3442; --accent:#7F93FF; --accent-ink:#10151D; */
@@ -31,6 +32,7 @@
   --ink:#e4dce7; 
   --muted:#4e2b4b; 
   --line:#8a5689; 
+  --surface:#482742;
   --accent:#96af4c; 
   --accent-ink:#321730;}
 html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -68,6 +70,19 @@ h2{font-size:1.75rem;letter-spacing:-.02em;margin:0 0 1.5rem}
 .work .year{color:var(--muted)}
 .work a:hover h3{color:var(--accent);text-decoration:underline;text-underline-offset:.25em}
 
+.project{display:grid;grid-template-columns:1fr;gap:1.5rem;padding:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:.75rem;color:inherit;text-decoration:none}
+.project img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:.5rem}
+.project-details{display:flex;flex-direction:column;align-items:flex-start;padding:1rem}
+.project-date{color:var(--muted);font-size:.95rem}
+.project h3{margin:.25rem 0 .5rem;font-size:1.5rem}
+.project:hover h3,.project:focus-visible h3{color:var(--accent)}
+.project p{margin:0 0 1rem;color:var(--muted)}
+.project-tools{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:auto 0 0;padding:0}
+.project-tools li{border:1px solid var(--line);padding:.2rem .7rem;border-radius:2rem;font-size:.9rem}
+@media(min-width:48rem){.project{grid-template-columns:16rem 1fr;gap:1.5rem}.project img{width:16rem}}
+.projects{display:flex;flex-direction:column;gap:1rem}
+.projects h2{margin-bottom:.5rem}
+
 /* CONTACT SECTION CSS */
 .contact p{max-width:34rem;color:var(--muted)}
 .contact .mail{font-size:clamp(1.5rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em;word-break:break-word;grid-column:1;justify-self:start}
@@ -88,6 +103,7 @@ footer{padding:2rem 0;color:var(--muted);font-size:.95rem}
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:6rem;height:6rem;border:1px solid var(--line);border-radius:50%;color:var(--ink);transition:background .2s ease,color .2s ease,border-color .2s ease}
 .icon-btn:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .icon-btn svg{width:3rem;height:3rem}
+.contact .social a:last-child svg{transform:scale(1.2)}
 @media (prefers-reduced-motion:reduce){.icon-btn{transition:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -147,17 +163,44 @@ footer{padding:2rem 0;color:var(--muted);font-size:.95rem}
       </a>
     </section>
 
+
+    <section id="projects" class="projects">
+      <h2>Projects</h2>
+      <a class="project" href="couch-project.html">
+        <img src="imgs/Blender-couch/couch-technical-1.png" alt="3D model of a brown leather couch">
+        <div class="project-details">
+          <span class="project-date">2026</span>
+          <h3>Sitting in The Past</h3>
+          <p>An exploration of our relationship to everyday objects and their perceved value. This project features a technical and conceptual model of a brown leather couch, modeled in Blender using low-poly, hard surface techniques.</p>
+          <ul class="project-tools" aria-label="Tools used">
+            <li>Blender</li><li>BlenderKit</li>
+          </ul>
+        </div>
+      </a>
+      <a class="project" href="princess-tower.html">
+        <img src="imgs/princess-tower/bg.png" alt="">
+        <div class="project-details">
+          <span class="project-date">Summer 2026</span>
+          <h3>The Princess Tower</h3>
+          <p>A 2D Metroidvania and platformer game I developed in Godot as a means of teaching myself the software.</p>
+          <ul class="project-tools" aria-label="Tools used">
+            <li>Godot</li><li>Itch.io Tileset</li>
+          </ul>
+        </div>
+      </a>
+    </section>
+
     <!-- CONTACT SECTION HMTL -->
     <section id="contact" class="contact">
       <h2>Contact</h2>
-      <p>I am looking for a summer 2027 internship, interested to learn and apply my skills in a creative and team environment.</p>
+      <p>I am looking for a summer 2027 internship, interested to learn and apply my skills in a creative and collaborative environment.</p>
       <a class="mail" href="mailto:lilygriff.22@gmail.com">lilygriff.22@gmail.com</a>
       <div class="social">
         <a class="icon-btn" href="https://www.linkedin.com/in/lily-griffiths-7011563aa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
         <a class="icon-btn" href="imgs/Lily-Griffiths-CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://w3.org"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/></svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://w3.org"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/></svg>
         </a>
       </div>
     </section>
